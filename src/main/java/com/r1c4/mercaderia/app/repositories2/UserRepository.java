@@ -31,40 +31,36 @@ public class UserRepository {
     }
 
     /**
-     * 
-     *  public Optional<User> getUser(int id) {
-        return userCrudRepository.findById(id);
+     *
+     * public Optional<User> getUser(int id) { return
+     * userCrudRepository.findById(id);
      */
-    public Optional<User> getById(int id) {
+    public Optional<User> getUser(int id) {
         return userCrudRepository.findById(id);
     }
-       
+
     public User save(User user) {
         return userCrudRepository.save(user);
     }
 
-    
-     //retorna el usuario si el email existe
-    public Optional<User> getByEmail(String  email){
+    //retorna el usuario si el email existe
+    public Optional<User> getByEmail(String email) {
         return userCrudRepository.findByEmail(email);
     }
 
-     public boolean verificarEmail(String email) {
+    public boolean verificarEmail(String email) {
         Optional<User> usuario = userCrudRepository.findByEmail(email);
         return usuario.isPresent();
-     }
-     
-    public Optional<User> autenticarUsuario(String email, String password) {
+    }
+
+    public Optional<User> getByEmailAndPassword(String email, String password) {
         return userCrudRepository.findByEmailAndPassword(email, password);
     }
+}
 
     /**
      * DELETE FROM TABLE
      *
-     * @param user
+     * @param user public void delete(User user) {
+     * userCrudRepository.delete(user); }
      */
-    public void delete(User user) {
-        userCrudRepository.delete(user);
-    }
-
-}

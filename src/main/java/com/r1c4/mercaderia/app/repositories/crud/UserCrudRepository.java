@@ -16,10 +16,10 @@ import org.springframework.data.repository.CrudRepository;
  */
 public interface UserCrudRepository extends CrudRepository<User, Integer> {
 
-    @Query("select u from User u where u.email = ?1 and u.password = ?2")
+  //  @Query("select u from User u where u.email = ?1 and u.password = ?2")
     Optional<User> findByEmailAndPassword(String email, String password);
 
-    @Query( "select user from User user where user.email =?1")
+ //   @Query( "select user from User user where user.email =?1")
     Optional<User> findByEmail(String email);
 
 }

@@ -28,7 +28,7 @@ public class UserService {
     }
 
     public Optional<User> getUser(int id) {
-        return userRepository.getById(id);
+        return userRepository.getUser(id);
     }
 
     public User registrar(User user) {
@@ -47,8 +47,8 @@ public class UserService {
         return userRepository.verificarEmail(email);
     }
 
-    public User autenticarUsuario(String email, String password) {
-        Optional<User> user = userRepository.autenticarUsuario(email, password);
+    public User getByEmailAndPassword(String email, String password) {
+        Optional<User> user = userRepository.getByEmailAndPassword(email, password);
         if (user.isPresent()) {
             return user.get();
 
@@ -61,11 +61,16 @@ public class UserService {
             return u;
         }
     }
-
+/**
+ * 
+ * @param user
+ * @return 
     public User save(User user) {
         return userRepository.save(user);
     }
     
+ */
+ 
     public boolean getByEmail(String email ){
         Optional<User> user= userRepository.getByEmail(email);
         if(user.isPresent()){

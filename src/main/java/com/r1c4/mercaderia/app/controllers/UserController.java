@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,38 +29,40 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/api/user/")
-@CrossOrigin( "*")
+@CrossOrigin("*")
 
 public class UserController {
- @Autowired
+
+    @Autowired
     private UserService userService;
-   /**
-    * Recuperar todos los usuarios
-    * @return 
-    */
+
+    /**
+     * Recuperar todos los usuarios
+     *
+     * @return
+     */
     @GetMapping("/all")
-    public List<User> getAll(){
+    public List<User> getUser() {
         return userService.getAll();
     }
     //Registrar usuario
 
-     @PostMapping("/new")
-   @ResponseStatus(HttpStatus.CREATED)
-   public User registrar (@RequestBody User user){
-       return userService.registrar(user);
-   }
-   
-   //autentica usuario
-    @GetMapping("/{email}/{pasword}")
-    public User autenticarUsuario(@PathVariable("email") String email, @PathVariable("password") String password){
-        return userService.autenticarUsuario(email, password);
+    @PostMapping("/new")
+    @ResponseStatus(HttpStatus.CREATED)
+    public User registrar(@RequestBody User user) {
+        return userService.registrar(user);
     }
-    
-    //autentica email
+
+    //autentica usuario con email y password
+    @GetMapping("/{email}/{password}")
+    private User getByEmailAndPassword(@PathVariable String email, @PathVariable String password) {
+        return userService.getByEmailAndPassword(email, password);
+    }
+
+    //autentica email solo
     @GetMapping("/{email}")
     public boolean verificarEmail(@PathVariable("email") String email) {
-        return userService.verificarEmail(email);
+        return userService.getByEmail(email);
     }
-   
-   
+
 }
